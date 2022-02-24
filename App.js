@@ -1,8 +1,37 @@
 import React from 'react';
-import AppNavigation from './src/navigations/AppNavigation';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-const App = () => {
-  return <AppNavigation />;
-};
+import NotesScreen from './src/screens/NotesScreen';
+import Sentences from './src/screens/Sentences';
+import {Screens} from './src/config/NavigationConfig';
+const Stack = createStackNavigator();
 
-export default App;
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name={Screens.NotesScreen}
+        component={NotesScreen}
+        options={{
+          title: 'Note',
+        }}
+      />
+      <Stack.Screen
+        name={Screens.Sentences}
+        component={Sentences}
+        options={{
+          title: 'Sentences',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}

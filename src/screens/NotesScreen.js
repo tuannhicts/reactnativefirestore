@@ -21,9 +21,12 @@ const NotesScreen = () => {
     return () => handleNotes();
   }, []);
 
-  const navigateScreens = useCallback(() => {
-    return navigation.navigate(Screens.Sentences);
-  }, [navigation]);
+  const navigateScreens = useCallback(
+    item => {
+      return navigation.navigate(Screens.Sentences, {item: item});
+    },
+    [navigation],
+  );
 
   const renderItem = useCallback(item => {
     return (
@@ -36,6 +39,7 @@ const NotesScreen = () => {
         </Pressable>
       </View>
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <FlatList
