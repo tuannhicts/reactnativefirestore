@@ -5,7 +5,8 @@ import {useNavigation} from '@react-navigation/native';
 import {Screens} from '../config/NavigationConfig';
 
 const NotesScreen = () => {
-  const [data, setData] = useState('');
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   useEffect(() => {
     const handleNotes = firestore()
@@ -20,22 +21,22 @@ const NotesScreen = () => {
     //cleanup
     return () => handleNotes();
   }, []);
-
   const navigateScreens = useCallback(
     item => {
-      return navigation.navigate(Screens.Sentences, {item: item});
+      return navigation.navigate(Screens.Sentences, {id: item?.item?.key});
     },
     [navigation],
   );
+  const keyExtractor = useCallback((item, index) => index.toString(), []);
 
   const renderItem = useCallback(item => {
     return (
       <View style={styles.container}>
         <View>
-          <Text style={styles.title}>{item.item.title}</Text>
+          <Text style={styles.title}>{item?.item?.title}</Text>
         </View>
-        <Pressable onPress={navigateScreens}>
-          <Text style={styles.owner}>{item.item.owner}</Text>
+        <Pressable onPress={() => navigateScreens(item)}>
+          <Text style={styles.owner}>{item?.item?.owner}</Text>
         </Pressable>
       </View>
     );
@@ -46,6 +47,7 @@ const NotesScreen = () => {
       data={data || []}
       renderItem={renderItem}
       style={styles.flatList}
+      keyExtractor={keyExtractor}
     />
   );
 };
