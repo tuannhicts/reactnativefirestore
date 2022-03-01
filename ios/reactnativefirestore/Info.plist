@@ -24,6 +24,19 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription	</key>
+	<string>Required for Video
+Required for Video
+</string>
+	<key>NSMicrophoneUsageDescription	</key>
+	<string>Required for Audio
+</string>
+	<key>NSBluetoothPeripheralUsageDescription	</key>
+	<string>Required for Bluetooth audio devices
+</string>
+	<key>NSPhotoLibraryUsageDescription	</key>
+	<string>Used for sharing images from the photo library
+</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
